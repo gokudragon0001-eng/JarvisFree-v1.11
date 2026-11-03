@@ -1,0 +1,24 @@
+JARVIS v1.9 voice update
+- Say "Hello" to wake JARVIS (the foreground notification must be active).
+- After wake, speak a command such as "screen lock" / "phone lock".
+- First screen-lock use opens Android's Device Admin approval screen. The phone owner must approve it.
+- Once approved, "Hello screen lock" requests Android to lock the screen immediately.
+- Other existing app/contact/WhatsApp voice commands remain available.
+
+IMPORTANT VOICE PRIVACY LIMITATION
+The standard Android SpeechRecognizer wake phrase loop recognizes words, not the identity of the speaker. It cannot reliably know whether the owner or another person said "Hello". This build does NOT claim voice-owner authentication. Keep the phone physically secure; for owner-only wake activation, a separately tested speaker-verification model and enrollment flow are required. Android speech recognition may use the device's configured recognition provider and may require internet.
+
+PERMISSIONS
+- Microphone: required for the wake phrase listener; persistent notification is shown while listening.
+- Device Admin: optional, requested only when the user first asks to lock the screen; grants the narrow force-lock policy. Revoke in Android Settings > Security > Device admin apps.
+- Accessibility: optional and only for the existing supported text-entry actions.
+
+No command can silently bypass Android permission screens. Screen lock cannot be tested without installing on a real Android device and approving Device Admin.
+
+WHATSAPP CONTACT + VOICE TYPING (v1.10)
+1. Say: "Hello open WhatsApp Ali" or "Hello WhatsApp kholo Ali" to open Ali's saved contact chat.
+2. Or say: "Hello open WhatsApp", then say the saved contact's name.
+3. After the chat opens, say: "Hello type Assalam o Alaikum, kaise hain?" (or simply speak the message).
+4. JARVIS types the message into the WhatsApp composer using the enabled Accessibility service.
+5. You must review and press WhatsApp Send yourself. JARVIS never sends it automatically.
+Required: grant Contacts permission and enable JARVIS Phone Control under Android Accessibility settings. WhatsApp must be installed and the contact must have a valid WhatsApp number.
